@@ -1,26 +1,17 @@
 {
-  "build": {
-    "dockerfile": "/workspaces/Devctl/.devctl.dockerfile"
-  },
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.base.schema.json",
+  "image": "debian:latest",
   "features": {
     "ghcr.io/devcontainers/features/nix:1": {
       "packages": "helix,csharp-ls,vscode-json-languageserver"
     },
     "ghcr.io/devcontainers/features/dotnet:2": {}
   },
-  "containerEnv": {
-    "DISPLAY": ":0"
-  },
-  "mounts": [
-    "/tmp/.X11-unix/X0:/tmp/.X11-unix/X0"
-  ],
-  "containerUser": "devctl",
   "customizations": {
-    "devctl": {
-      "x11": {
-        "display": ":0"
-      },
-      "user": {}
+    "ironClad": {
+      "user": {},
+      "git": {},
+      "docker": {}
     }
   }
 }
