@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "2.4.2",
+      "resolved": "ghcr.io/devcontainers/features/dotnet@sha256:e56b2abde945918508f1bca94d5545e23b30f5f1d4f3b363ad4819c6b81396f1",
+      "integrity": "sha256:e56b2abde945918508f1bca94d5545e23b30f5f1d4f3b363ad4819c6b81396f1"
+    }
+  }
+}

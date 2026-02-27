@@ -12,6 +12,7 @@ internal sealed class ExecCommand : Command
     {
         this.logger = logger;
         SetAction(Execute);
+        TreatUnmatchedTokensAsErrors = false;
     }
 
     public void Execute(ParseResult parseResult)

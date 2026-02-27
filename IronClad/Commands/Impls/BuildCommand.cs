@@ -4,34 +4,31 @@ using Mohr.Jonas.IronClad.Workflows.Impls;
 
 namespace Mohr.Jonas.IronClad.Commands.Impls;
 
-internal sealed class RunCommand : Command
+internal sealed class BuildCommand : Command
 {
     private readonly ILogger logger;
 
-    public RunCommand(ILogger logger) : base("run", "Run a command in a container")
+    public BuildCommand(ILogger logger) : base("build", "Generate a devcontainer config with features applied")
     {
         this.logger = logger;
         SetAction(Execute);
-        TreatUnmatchedTokensAsErrors = false;
     }
 
     public void Execute(ParseResult parseResult)
     {
         if (logger.LogLevel == LogLevel.Off)
-            Spinner.SpinToCompletion("Executing command", () => ExecuteInternal(parseResult));
+            Spinner.SpinToCompletion("Building config", () => ExecuteInternal(parseResult));
         else
             ExecuteInternal(parseResult);
-
     }
 
     private void ExecuteInternal(ParseResult parseResult)
     {
-        var workflow = new RunWorkflow(
-                logger,
-                parseResult.GetValue(BaseArguments.Cwd),
-                parseResult.GetValue(BaseArguments.ConfigPath),
-                [.. parseResult.UnmatchedTokens]
-            );
+        var workflow = new BuildConfigWorkflow(
+            logger, 
+            parseResult.GetValue(BaseArguments.Cwd), 
+            parseResult.GetValue(BaseArguments.ConfigPath)            
+        );
         workflow.Run();
     }
 }

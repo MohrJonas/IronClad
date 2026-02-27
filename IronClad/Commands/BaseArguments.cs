@@ -7,7 +7,8 @@ internal static class BaseArguments
 {
     public static Option<string> Cwd = new("--cwd")
     {
-        Description = "The working directory to operate in"
+        Description = "The working directory to operate in",
+        CustomParser = result => Path.GetFullPath(result.Tokens.Single().Value)
     };
 
     public static Option<string> ConfigPath = new("--config-path")

@@ -11,7 +11,10 @@ internal static class Program
     {
         var logger = new ConsoleLogger(LogLevel.Off);
 
-        var root = new RootCommand();
+        var root = new RootCommand()
+        {
+            Description = "Wrapper around devcontainer to allow for more high-level features"
+        };
         root.Options.Add(BaseArguments.Cwd);
         root.Options.Add(BaseArguments.ConfigPath);
         root.Options.Add(BaseArguments.ApplicationLogLevel);
@@ -21,6 +24,8 @@ internal static class Program
         root.Subcommands.Add(new ExecCommand(logger));
         root.Subcommands.Add(new RunCommand(logger));
         root.Subcommands.Add(new UpgradeCommand(logger));
+        root.Subcommands.Add(new BuildCommand(logger));
+        root.Subcommands.Add(new WatchCommand(logger));
 
         var parseResult = root.Parse(args);
         logger.LogLevel = parseResult.CommandResult.GetRequiredValue<LogLevel>("--log-level");

@@ -35,7 +35,7 @@ public sealed class BuildConfigWorkflow(ILogger logger, string? cwd, string? cla
             logger.LogDebug($"Feature name is '{featureName}'");
 
             var featureConfiguration = pair.Value!.AsObject();
-            var feature = FeatureFactory.GetFeatureByName(featureName, featureConfiguration);
+            var feature = FeatureFactory.GetFeatureByName(featureName, featureConfiguration, workingDirectory);
             logger.LogInformation($"Applying feature '{featureName}'");
 
             feature.Apply(builder);
