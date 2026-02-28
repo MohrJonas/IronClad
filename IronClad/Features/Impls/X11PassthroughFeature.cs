@@ -8,6 +8,9 @@ public sealed record X11PassthroughFeatureSettings
 {
     [JsonPropertyName("display")]
     public string? Display { init; get; }
+
+    [JsonPropertyName("xauthority")]
+    public string? Xauthority { init; get; }
 }
 
 public sealed class X11PassthroughFeature(JsonObject @object) : Feature<X11PassthroughFeatureSettings>(
@@ -24,8 +27,16 @@ public sealed class X11PassthroughFeature(JsonObject @object) : Feature<X11Passt
         var socketPath = Path.Combine("/tmp", ".X11-unix", socketFileName);
         if (!File.Exists(socketPath))
             throw new FeatureConfigurationException<X11PassthroughFeature>($"Socket path {socketPath} does not exist");
+
+        var xauthority = FeatureConfiguration.Xauthority ?? Environment.GetEnvironmentVariable("XAUTHORITY");
+
         devContainerBuilder
             .AddMount($"type=bind,src={socketPath},dst={socketPath}")
             .WithContainerEnv("DISPLAY", display);
+
+        if(xauthority != null)
+            devContainerBuilder
+                .AddMount($"type=bind,src={xauthority},dst={xauthority}")
+                .WithContainerEnv("XAUTHORITY", xauthority);
     }
 }
