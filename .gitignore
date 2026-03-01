@@ -42,3 +42,4 @@ obj/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,dotnetcore
 
 .devcontainer.json
+.ironClad.dockerfile
