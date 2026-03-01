@@ -1,0 +1,199 @@
+{
+    "$schema": "https://raw.githubusercontent.com/json-schema-org/json-schema-spec/refs/heads/main/specs/schema.json",
+    "allOf": [
+        {
+            "$ref": "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.schema.json"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "customizations": {
+                    "type": "object",
+                    "properties": {
+                        "ironClad": {
+                            "type": "object",
+                            "properties": {
+                                "x11": {
+                                    "description": "Pass a host-provided x11 socket into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "display": {
+                                            "description": "X11 display to use",
+                                            "examples": [
+                                                ":0"
+                                            ],
+                                            "default": "$DISPLAY",
+                                            "type": "string",
+                                            "pattern": "^:\\d+$"
+                                        },
+                                        "xauthority": {
+                                            "description": "Path to the xauthority file to use",
+                                            "examples": [
+                                                "/run/user/1000/xauth.abcdef"
+                                            ],
+                                            "default": "$XAUTHORITY",
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "additionalProperties": false
+                                    }
+                                },
+                                "wayland": {
+                                    "description": "Pass a host-provided wayland socket into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "waylandDisplay": {
+                                            "description": "The wayland display to use",
+                                            "examples": [
+                                                "wayland-0"
+                                            ],
+                                            "default": "$WAYLAND_DISPLAY",
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "runtimeDir": {
+                                            "description": "The runtime dir the wayland display uses",
+                                            "examples": [
+                                                "/run/user/1000"
+                                            ],
+                                            "default": "$XDG_RUNTIME_DIR",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "docker": {
+                                    "description": "Pass a host-provided docker (or eqivalent) socket into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "socketPath": {
+                                            "description": "Path to the docker socket to use",
+                                            "examples": [
+                                                "/var/run/docker.sock"
+                                            ],
+                                            "default": "/var/run/docker.sock",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "pulseaudio": {
+                                    "description": "Pass a host-provided pulseaudio socket into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "folderName": {
+                                            "description": "Name of the directory containing the pulseaudio socket",
+                                            "examples": [
+                                                "pulse"
+                                            ],
+                                            "default": "pulse",
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "runtimeDir": {
+                                            "description": "The runtime dir the wayland display uses",
+                                            "examples": [
+                                                "/run/user/1000"
+                                            ],
+                                            "default": "$XDG_RUNTIME_DIR",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "pipewire": {
+                                    "description": "Pass a host-provided pipewire socket into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "socketName": {
+                                            "description": "Name to the pipewire socket to use",
+                                            "examples": [
+                                                "pipewire-0"
+                                            ],
+                                            "default": "pipewire-0",
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "runtimeDir": {
+                                            "description": "The runtime dir the wayland display uses",
+                                            "examples": [
+                                                "/run/user/1000"
+                                            ],
+                                            "default": "$XDG_RUNTIME_DIR",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "user": {
+                                    "description": "Create a user with same gid / uid in the container as on the host",
+                                    "type": "object",
+                                    "properties": {
+                                        "uid": {
+                                            "description": "The uid to use",
+                                            "examples": [
+                                                1000
+                                            ],
+                                            "default": "Uid of the caller",
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 65535
+                                        },
+                                        "gid": {
+                                            "description": "The gid to use",
+                                            "examples": [
+                                                100
+                                            ],
+                                            "default": "Gid of the caller",
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 65535
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "git": {
+                                    "description": "Pass through a host-provided .gitconfig file",
+                                    "type": "object",
+                                    "properties": {
+                                        "gitconfigPath": {
+                                            "description": "Path to the .gitconfig to use",
+                                            "examples": [
+                                                "/home/foo/.gitconfig"
+                                            ],
+                                            "default": "$HOME/.gitconfig",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "gpu": {
+                                    "description": "Pass through the host-provided /dev/dri directory",
+                                    "type": "object",
+                                    "properties": {
+                                        "driPath": {
+                                            "description": "Path to the directory to pass through",
+                                            "examples": [
+                                                "/dev/dri"
+                                            ],
+                                            "default": "/dev/dri",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

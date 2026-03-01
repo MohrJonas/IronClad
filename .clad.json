@@ -1,5 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/refs/heads/main/schemas/devContainer.base.schema.json",
   "image": "debian:latest",
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {}
