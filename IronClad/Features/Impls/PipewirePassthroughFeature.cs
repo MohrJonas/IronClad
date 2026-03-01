@@ -20,13 +20,13 @@ public sealed class PipewirePassthroughFeature(JsonObject @object) : Feature<Pip
 {
     public override void Apply(DevContainerBuilder devContainerBuilder)
     {
-        var socketName = FeatureConfiguration.SocketName ?? "wayland-0";
+        var socketName = FeatureConfiguration.SocketName ?? "pipewire-0";
         var runtimeDir = FeatureConfiguration.RuntimeDir
             ?? Environment.GetEnvironmentVariable("XDG_RUNTIME_DIR")
             ?? throw new FeatureConfigurationException<PipewirePassthroughFeature>("Unable to determine xdg runtime directory. Consider specifying it explicitly");
         var pipewireSocketPath = Path.Combine(runtimeDir, socketName);
         if (!File.Exists(pipewireSocketPath))
-            throw new FeatureConfigurationException<WaylandPassthroughFeatureSettings>($"Socket path {pipewireSocketPath} does not exist");
+            throw new FeatureConfigurationException<PipewirePassthroughFeature>($"Socket path {pipewireSocketPath} does not exist");
         devContainerBuilder
             .AddMount($"type=bind,src={pipewireSocketPath},dst={pipewireSocketPath}")
             .WithContainerEnv("XDG_RUNTIME_DIR", runtimeDir);
