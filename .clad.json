@@ -8,6 +8,12 @@
       "user": {},
       "git": {},
       "docker": {}
+    },
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csdevkit",
+        "ms-azuretools.vscode-docker"
+      ]
     }
   }
 }
