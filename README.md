@@ -3,7 +3,7 @@
 ## About
 
 I love devcontainers for development. They keep my system clean and avoid the classic "it works on my machine" predicament.  
-However, I often find myself missing certain features like the ability to easily develop gui applications over games.  
+However, I often find myself missing certain features like the ability to easily develop gui applications or games.  
 IronClad attempts to close this gap while remaining as close to the original experience as possible.  
 
 ## Usage
@@ -110,7 +110,7 @@ Currently, the following features are supported:
 - `wayland`: Passthrough a host-provided wayland socket
 - `docker`: Passthrough a host-provided docker socket
 - `pulseaudio`: Passthrough a host-provided pulseaudio socket
-- `pipewire`: Passthrough a host-provided pipewire socket"
-- `user`: Create a user named clad on the container with the same uid and gid as on the host
+- `pipewire`: Passthrough a host-provided pipewire socket
+- `user`: Create a user named clad in the container with the same uid and gid as on the host
 - `git`: Passthrough a host-provided .gitconfig
 - `gpu`: Passthrough the host-provided dri folder
