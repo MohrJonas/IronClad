@@ -187,6 +187,22 @@
                                         }
                                     },
                                     "additionalProperties": false
+                                },
+                                "kvm": {
+                                    "description": "Pass the host-provided kvm device into the container",
+                                    "type": "object",
+                                    "properties": {
+                                        "kvmPath": {
+                                            "description": "Path to the kvm device to use",
+                                            "examples": [
+                                                "/dev/kvm"
+                                            ],
+                                            "default": "/dev/kvm",
+                                            "type": "string",
+                                            "minLength": 1
+                                        }
+                                    },
+                                    "additionalProperties": false
                                 }
                             },
                             "additionalProperties": false

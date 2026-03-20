@@ -1,8 +1,16 @@
+using System.Text.Json.Nodes;
+
 namespace Mohr.Jonas.IronClad;
 
 public sealed class DevContainerBuilder(DevContainer? container = null)
 {
     public readonly DevContainer Container = container ?? new();
+
+    public DevContainerBuilder WithSchema(string schema)
+    {
+        Container.Schema = schema;
+        return this;
+    }
 
     public DevContainerBuilder WithName(string name)
     {
@@ -224,6 +232,12 @@ public sealed class DevContainerCustomizationsBuilder
     public DevContainerCustomizationsBuilder WithVSCode(DevContainerVSCode vscode)
     {
         _customizations.VSCode = vscode;
+        return this;
+    }
+
+    public DevContainerCustomizationsBuilder WithIronClad(JsonObject obj)
+    {
+        _customizations.IronClad = obj;
         return this;
     }
 

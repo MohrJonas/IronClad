@@ -26,6 +26,7 @@ internal static class Program
         root.Subcommands.Add(new UpgradeCommand(logger));
         root.Subcommands.Add(new BuildCommand(logger));
         root.Subcommands.Add(new WatchCommand(logger));
+        root.Subcommands.Add(new InitCommand(logger));
 
         var parseResult = root.Parse(args);
         logger.LogLevel = parseResult.CommandResult.GetRequiredValue<LogLevel>("--log-level");

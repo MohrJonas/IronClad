@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 
 public sealed record DevContainer
 {
+    [JsonPropertyName("$schema")]
+    public string? Schema { get; set; }
+
     [JsonPropertyName("name")]
     public string? Name { get; set; }
 

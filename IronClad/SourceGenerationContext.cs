@@ -15,6 +15,7 @@ namespace Mohr.Jonas.IronClad;
 [JsonSerializable(typeof(X11PassthroughFeatureSettings))]
 [JsonSerializable(typeof(GitPassthroughFeatureSettings))]
 [JsonSerializable(typeof(GpuPassthroughFeatureSettings))]
+[JsonSerializable(typeof(KvmPassthroughFeatureSettings))]
 [JsonSerializable(typeof(JsonObject))]
 [JsonSerializable(typeof(JsonElement))]
 internal partial class SourceGenerationContext : JsonSerializerContext { }

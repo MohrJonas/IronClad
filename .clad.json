@@ -1,8 +1,14 @@
 {
+  "$schema": "https://raw.githubusercontent.com/MohrJonas/IronClad/refs/heads/master/schema.json",
   "image": "debian:latest",
   "features": {
-    "ghcr.io/devcontainers/features/dotnet:2": {}
+    "ghcr.io/devcontainers/features/dotnet:2": {},
+    "ghcr.io/mohrjonas/devcontainer-sudo/devcontainer-sudo:latest": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": false
+    }
   },
+  "postCreateCommand": "sudo apt-get -y update && sudo apt-get -y install build-essential",
   "customizations": {
     "ironClad": {
       "user": {},

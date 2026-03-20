@@ -15,6 +15,7 @@ public static class FeatureFactory
         "user" => new UserPassthroughFeature(@object, cwd),
         "git" => new GitPassthroughFeature(@object),
         "gpu" => new GpuPassthroughFeature(@object),
+        "kvm" => new KvmPassthroughFeature(@object),
         _ => throw new NotSupportedException($"Unknown feature '{name}'")
     };
 }

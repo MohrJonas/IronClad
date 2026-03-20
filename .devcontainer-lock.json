@@ -4,6 +4,11 @@
       "version": "2.4.2",
       "resolved": "ghcr.io/devcontainers/features/dotnet@sha256:e56b2abde945918508f1bca94d5545e23b30f5f1d4f3b363ad4819c6b81396f1",
       "integrity": "sha256:e56b2abde945918508f1bca94d5545e23b30f5f1d4f3b363ad4819c6b81396f1"
+    },
+    "ghcr.io/mohrjonas/devcontainer-sudo/devcontainer-sudo:latest": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/mohrjonas/devcontainer-sudo/devcontainer-sudo@sha256:3dfcb649b78822e7d9df69d2a16b7edf2ecf4340bd1404b2b70774e589e41c3f",
+      "integrity": "sha256:3dfcb649b78822e7d9df69d2a16b7edf2ecf4340bd1404b2b70774e589e41c3f"
     }
   }
 }
