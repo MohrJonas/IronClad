@@ -1,6 +1,7 @@
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Mohr.Jonas.IronClad.Exceptions;
+using Mohr.Jonas.IronClad.Features.Dependence;
 
 namespace Mohr.Jonas.IronClad.Features.Impls;
 
@@ -10,6 +11,7 @@ public sealed record GitPassthroughFeatureSettings
     public string? GitconfigPath { init; get; }
 }
 
+[RequiresFeature(typeof(UserPassthroughFeature))]
 public sealed class GitPassthroughFeature(JsonObject @object) : Feature<GitPassthroughFeatureSettings>(@object, SourceGenerationContext.Default.GitPassthroughFeatureSettings)
 {
     public override void Apply(DevContainerBuilder devContainerBuilder)

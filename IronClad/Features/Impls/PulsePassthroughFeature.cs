@@ -1,6 +1,7 @@
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Mohr.Jonas.IronClad.Exceptions;
+using Mohr.Jonas.IronClad.Features.Dependence;
 
 namespace Mohr.Jonas.IronClad.Features.Impls;
 
@@ -13,6 +14,7 @@ public sealed record PulsePassthroughFeatureSettings
     public string? RuntimeDir { init; get; }
 }
 
+[RequiresFeature(typeof(UserPassthroughFeature))]
 public sealed class PulsePassthroughFeature(JsonObject @object) : Feature<PulsePassthroughFeatureSettings>(
     @object,
     SourceGenerationContext.Default.PulsePassthroughFeatureSettings

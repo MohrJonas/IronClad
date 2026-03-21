@@ -30,11 +30,11 @@ public sealed class InitWorkflow(ILogger logger, string? cwd, string? configPath
                 .Build()
             )
             .Build();
-        
+
         var cladFile = Path.Combine(workingDirectory, configPath ?? ".clad.json");
         logger.LogInformation($"Writing config to {cladFile}");
-        
-        if(File.Exists(cladFile))
+
+        if (File.Exists(cladFile))
         {
             var backupPath = Path.Combine(workingDirectory, $"{configPath ?? ".clad.json"}.bak");
             logger.LogInformation("Config already exists, backing it up first");

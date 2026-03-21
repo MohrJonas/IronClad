@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System.Text.Json.Nodes;
 using Mohr.Jonas.IronClad.Features.Impls;
 
@@ -18,4 +19,27 @@ public static class FeatureFactory
         "kvm" => new KvmPassthroughFeature(@object),
         _ => throw new NotSupportedException($"Unknown feature '{name}'")
     };
+
+    public static string GetFeatureNameByType(Type featureType)
+    {
+        if (featureType == typeof(X11PassthroughFeature))
+            return "x11";
+        else if (featureType == typeof(WaylandPassthroughFeature))
+            return "wayland";
+        else if (featureType == typeof(DockerPassthroughFeature))
+            return "docker";
+        else if (featureType == typeof(PulsePassthroughFeature))
+            return "pulseaudio";
+        else if (featureType == typeof(PipewirePassthroughFeature))
+            return "pipewire";
+        else if (featureType == typeof(UserPassthroughFeature))
+            return "user";
+        else if (featureType == typeof(GitPassthroughFeature))
+            return "git";
+        else if (featureType == typeof(GpuPassthroughFeature))
+            return "gpu";
+        else if (featureType == typeof(KvmPassthroughFeature))
+            return "kvm";
+        else throw new NotSupportedException($"Unknown feature '{featureType}'");
+    }
 }

@@ -1,6 +1,8 @@
+using System.Reflection;
 using System.Text.Json;
 using Mohr.Jonas.IronClad.Exceptions;
 using Mohr.Jonas.IronClad.Features;
+using Mohr.Jonas.IronClad.Features.Dependence;
 using Mohr.Jonas.IronClad.Logging;
 
 namespace Mohr.Jonas.IronClad.Workflows.Impls;
@@ -36,8 +38,19 @@ public sealed class BuildConfigWorkflow(ILogger logger, string? cwd, string? cla
 
             var featureConfiguration = pair.Value!.AsObject();
             var feature = FeatureFactory.GetFeatureByName(featureName, featureConfiguration, workingDirectory);
-            logger.LogInformation($"Applying feature '{featureName}'");
 
+            var featureType = feature.GetType();
+            var requiredFeaturesTypes = featureType.GetCustomAttribute<RequiresFeatureAttribute>()?.FeatureTypes ?? [];
+            logger.LogInformation($"Also enabling features {string.Join(", ", (object[])requiredFeaturesTypes)} because they are required by feature {featureType}");
+            foreach (var requiredFeatureType in requiredFeaturesTypes)
+            {
+                var requiredFeatureName = FeatureFactory.GetFeatureNameByType(requiredFeatureType);
+                logger.LogInformation($"Applying additional feature '{requiredFeatureName}'");
+                var requiredFeature = FeatureFactory.GetFeatureByName(requiredFeatureName, featureConfiguration, workingDirectory);
+                requiredFeature.Apply(builder);
+            }
+
+            logger.LogInformation($"Applying feature '{featureName}'");
             feature.Apply(builder);
         }
 

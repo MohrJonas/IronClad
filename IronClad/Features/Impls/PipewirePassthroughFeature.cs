@@ -1,6 +1,7 @@
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Mohr.Jonas.IronClad.Exceptions;
+using Mohr.Jonas.IronClad.Features.Dependence;
 
 namespace Mohr.Jonas.IronClad.Features.Impls;
 
@@ -13,6 +14,7 @@ public sealed record PipewirePassthroughFeatureSettings
     public string? RuntimeDir { init; get; }
 }
 
+[RequiresFeature(typeof(UserPassthroughFeature))]
 public sealed class PipewirePassthroughFeature(JsonObject @object) : Feature<PipewirePassthroughFeatureSettings>(
     @object,
     SourceGenerationContext.Default.PipewirePassthroughFeatureSettings

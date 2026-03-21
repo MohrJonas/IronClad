@@ -26,13 +26,13 @@ internal sealed class WatchCommand : Command
     {
         var tokenSource = new CancellationTokenSource();
         logger.LogDebug("Installing ctrl-c listener");
-        Console.CancelKeyPress += (_, _) 
+        Console.CancelKeyPress += (_, _)
             => tokenSource.Cancel();
         var workflow = new WatchWorkflow(
-            logger, 
+            logger,
             tokenSource.Token,
-            parseResult.GetValue(BaseArguments.Cwd), 
-            parseResult.GetValue(BaseArguments.ConfigPath)            
+            parseResult.GetValue(BaseArguments.Cwd),
+            parseResult.GetValue(BaseArguments.ConfigPath)
         );
         workflow.Run();
     }

@@ -34,7 +34,7 @@ public sealed class X11PassthroughFeature(JsonObject @object) : Feature<X11Passt
             .AddMount($"type=bind,src={socketPath},dst={socketPath}")
             .WithContainerEnv("DISPLAY", display);
 
-        if(xauthority != null)
+        if (xauthority != null)
             devContainerBuilder
                 .AddMount($"type=bind,src={xauthority},dst={xauthority}")
                 .WithContainerEnv("XAUTHORITY", xauthority);

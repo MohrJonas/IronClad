@@ -25,9 +25,9 @@ internal sealed class BuildCommand : Command
     private void ExecuteInternal(ParseResult parseResult)
     {
         var workflow = new BuildConfigWorkflow(
-            logger, 
-            parseResult.GetValue(BaseArguments.Cwd), 
-            parseResult.GetValue(BaseArguments.ConfigPath)            
+            logger,
+            parseResult.GetValue(BaseArguments.Cwd),
+            parseResult.GetValue(BaseArguments.ConfigPath)
         );
         workflow.Run();
     }

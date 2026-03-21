@@ -60,7 +60,7 @@ public sealed class UserPassthroughFeature(JsonObject @object, string cwd) : Fea
             RUN groupadd -g {gid} clad
             RUN useradd -m -s /bin/bash -g {gid} -u {uid} clad
             """;
-            
+
             var dockerfilePath = Path.Combine(cwd, dockerfileName);
             File.WriteAllText(dockerfilePath, dockerFileContents);
             var build = new DevContainerBuildBuilder()
