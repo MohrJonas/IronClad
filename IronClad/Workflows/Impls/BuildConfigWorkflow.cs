@@ -40,8 +40,13 @@ public sealed class BuildConfigWorkflow(ILogger logger, string? cwd, string? cla
             var feature = FeatureFactory.GetFeatureByName(featureName, featureConfiguration, workingDirectory);
 
             var featureType = feature.GetType();
-            var requiredFeaturesTypes = featureType.GetCustomAttribute<RequiresFeatureAttribute>()?.FeatureTypes ?? [];
-            logger.LogInformation($"Also enabling features {string.Join(", ", (object[])requiredFeaturesTypes)} because they are required by feature {featureType}");
+            var requiredFeaturesTypes = (featureType.GetCustomAttribute<RequiresFeatureAttribute>()?.FeatureTypes ?? [])
+                .Where(type =>
+                {
+                    var name = FeatureFactory.GetFeatureNameByType(type);
+                    return !devContainer?.Customizations?.IronClad?.ContainsKey(name) ?? false;
+                });
+            logger.LogInformation($"Also enabling features {string.Join(", ", requiredFeaturesTypes)} because they are required by feature {featureType}");
             foreach (var requiredFeatureType in requiredFeaturesTypes)
             {
                 var requiredFeatureName = FeatureFactory.GetFeatureNameByType(requiredFeatureType);
