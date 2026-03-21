@@ -17,6 +17,6 @@ public sealed class GpuPassthroughFeature(JsonObject @object) : Feature<GpuPasst
         var driPath = FeatureConfiguration.DriPath ?? "/dev/dri";
         if (!Directory.Exists(driPath))
             throw new FeatureConfigurationException<GpuPassthroughFeature>("Unable to determine dri path to passthrough. Consider specifying it explicitly");
-        devContainerBuilder.AddMount($"type=bind,src={driPath},dst={driPath}");
+        devContainerBuilder.AddRunArgs("--device", $"{driPath}:/dev/dri");
     }
 }

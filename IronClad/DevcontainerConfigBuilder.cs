@@ -55,9 +55,16 @@ public sealed class DevContainerBuilder(DevContainer? container = null)
         return this;
     }
 
+    public DevContainerBuilder AddRunArgs(params string[] args)
+    {
+        Container.RunArgs ??= [];
+        Container.RunArgs.AddRange(args);
+        return this;
+    }
+
     public DevContainerBuilder WithRunArgs(params string[] args)
     {
-        Container.RunArgs = args.ToList();
+        Container.RunArgs = [.. args];
         return this;
     }
 

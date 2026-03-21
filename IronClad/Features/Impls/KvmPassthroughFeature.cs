@@ -16,6 +16,6 @@ public sealed class KvmPassthroughFeature(JsonObject @object) : Feature<KvmPasst
     {
         var devicePath = FeatureConfiguration.KvmDevicePath ?? "/dev/kvm";
         if (!File.Exists(devicePath))new FeatureConfigurationException<KvmPassthroughFeature>("Unable to determine kvm device to passthrough. Consider specifying it explicitly");
-        devContainerBuilder.AddMount($"type=bind,src={devicePath},dst={devicePath}");
+        devContainerBuilder.AddRunArgs("--device", $"{devicePath}:/dev/kvm");
     }
 }

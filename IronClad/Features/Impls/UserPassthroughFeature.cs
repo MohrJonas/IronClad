@@ -34,10 +34,10 @@ public sealed class UserPassthroughFeature(JsonObject @object, string cwd) : Fea
             var dockerFileContents = File.ReadAllLines(oldDockerFilePath).ToList();
 
             dockerFileContents.AddRange([
-                "RUN if getent passwd {uid}; then userdel -f $(getent passwd {uid} | cut -d \":\" -f 1); fi",
-                "RUN if getent group {gid}; then groupdel -f $(getent group {gid} | cut -d \":\" -f 1); fi",
-                "RUN groupadd -g {gid} clad",
-                "RUN useradd -m -s /bin/bash -g {gid} -u {uid} clad"
+                $"RUN if getent passwd {uid}; then userdel -f $(getent passwd {uid} | cut -d \":\" -f 1); fi",
+                $"RUN if getent group {gid}; then groupdel -f $(getent group {gid} | cut -d \":\" -f 1); fi",
+                $"RUN groupadd -g {gid} clad",
+                $"RUN useradd -m -s /bin/bash -g {gid} -u {uid} clad"
             ]);
 
             var dockerfilePath = Path.Combine(cwd, dockerfileName);

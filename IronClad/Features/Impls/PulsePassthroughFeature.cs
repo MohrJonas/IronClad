@@ -25,7 +25,7 @@ public sealed class PulsePassthroughFeature(JsonObject @object) : Feature<PulseP
             ?? Environment.GetEnvironmentVariable("XDG_RUNTIME_DIR")
             ?? throw new FeatureConfigurationException<PulsePassthroughFeature>("Unable to determine xdg runtime directory. Consider specifying it explicitly");
         var pulseFolderPath = Path.Combine(runtimeDir, folderName);
-        if (Directory.Exists(pulseFolderPath))
+        if (!Directory.Exists(pulseFolderPath))
             throw new FeatureConfigurationException<PulsePassthroughFeature>($"Folder path {pulseFolderPath} does not exist");
         devContainerBuilder
             .AddMount($"type=bind,src={pulseFolderPath},dst={pulseFolderPath}")
